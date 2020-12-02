@@ -576,6 +576,7 @@ if __name__ == '__main__':
     
     #Reading current config from file
     config = configparser.ConfigParser()
+    config.read('Apps/config.ini')
     import os
 
 
