@@ -585,4 +585,4 @@ if __name__ == '__main__':
     context.verify_mode = ssl.CERT_NONE
     context.load_verify_locations(config['ServerKey']['CA'])
     context.load_cert_chain(config['ServerKey']['ServerCert'],config['ServerKey']['SeverPriateKey'])
-    app.run(host= '0.0.0.0', port=444, ssl_context=context, debug=True)
+    app.run(host= '0.0.0.0', port=8080, ssl_context=context, debug=True)
