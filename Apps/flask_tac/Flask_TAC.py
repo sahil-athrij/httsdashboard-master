@@ -113,9 +113,9 @@ def BuildAnalyticsReprt(shift='apjc',tech_strip='aci',analytics_start_date='2020
 
 def RecordAccessLog(shift='apjc',tech_strip='aci'):
 
-    with open("/HTTSDashboard/logs/TAC/.stats",'r') as file:
+    with open("logs/TAC/.stats",'r') as file:
         stats = file.read()
-    with open("/HTTSDashboard/logs/TAC/.stats",'w') as file:
+    with open("logs/TAC/.stats",'w') as file:
         file.write(stats+"{} {} {} {} {}\n".format(shift.upper(),tech_strip.upper(),
         datetime.datetime.today().strftime('%Y-%m-%d %H:%M:%S'),request.environ['REMOTE_ADDR'],request.method))
 
@@ -504,9 +504,9 @@ def index_aci_legacy():
         
     if form_type == 'report':
         ###### GET Method result ######
-        commentfile = '/HTTSDashboard/logs/TAC/APJC/ACI/html/comment.txt'
-        headerhtmlfile = '/HTTSDashboard/logs/TAC/APJC/ACI/html/header.html'
-        bottomhtmlfile = '/HTTSDashboard/logs/TAC/APJC/ACI/html/bottom.html'
+        commentfile = 'logs/TAC/APJC/ACI/html/comment.txt'
+        headerhtmlfile = 'logs/TAC/APJC/ACI/html/header.html'
+        bottomhtmlfile = 'logs/TAC/APJC/ACI/html/bottom.html'
         dailyreportfilename = '{}{}_{}_{}.html'.format(report_path,select_datetime.strftime("%Y-%m-%d"),shift.upper(),tech_strip.upper())
 
         comment = ""
@@ -540,8 +540,8 @@ def index_aci_legacy():
         else:
             ACI_Analytics.main(analytics_start_date,analytics_end_date,force_overwrite=False)
             
-        headerhtmlfile = '/HTTSDashboard/logs/TAC/APJC/ACI/html/header.html'
-        bottomhtmlfile = '/HTTSDashboard/logs/TAC/APJC/ACI/html/bottom.html'
+        headerhtmlfile = 'logs/TAC/APJC/ACI/html/header.html'
+        bottomhtmlfile = 'logs/TAC/APJC/ACI/html/bottom.html'
         analytics_dir = '/static/'+analytics_start_date+'_'+analytics_end_date+'/'
         headerhtml = ""
         bottomhtml = ""
