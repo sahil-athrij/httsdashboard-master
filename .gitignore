@@ -1,0 +1,12 @@
+.DS_Store
+**/.cache/
+**/.jupyter/
+**/.ipython/
+**/.ipynb_checkpoints/
+**/.local/
+**/__pycache__/
+logs/
+RedisDB/
+PostgreSQLDB/
+pgadmin4/
+/data/

@@ -1,0 +1,127 @@
+FQDN:
+==============
+syd-htts-prd.cisco.com
+syd-htts-dashboard.cisco.com
+
+HTTS Workflow
+=================
+Realtime Notification : BORG CMGW Script - RabbitMQ(RabbitMQ_HTTS_Handler.py) - Redis(Redis_HTTS_App.py)
+
+ACI App workflow
+=================
+syd-htts-prd.cisco.com/ACI
+1.Data Srouce
+Message Broker and Message Parsing: BORG - RabbitMQ-Container - Parsing InQueue/Accept events  ,  2 containers, 2 Apps
+
+2. Apps
+Tracking Report Generator: Parsing Events and gerenate tracking report , 1 App
+Analytics Report Generator: Parsing Events and generat analytics report , 1 App
+
+3. GUI
+Frontend GUI: Flask API to read tracking report,  1 container 1 App
+Daily Email: Email Tracker Report , 1 App
+
+4. Bakend Jobs
+Scheudling: Cronjob to regularly running Apps inside container. - around 5 jobs
+
+Jira
+================
+Project: SYDHTTSQ
+https://jira-eng-rtp2.cisco.com/jira/secure/RapidBoard.jspa?rapidView=1562&projectKey=SYDHTTSQ
+
+Frontend UI
+================
+URL: https://scripts.cisco.com/app/sydhttsqm/
+Git: https://wwwin-gitlab-sjc.cisco.com/sydhtts/web-ui/blob/master/README.md
+
+Backend REST API (test ver)
+===============
+https://scripts.cisco.com/ui/edit/testpgsql?dev=false
+
+GIT Details:
+=================
+URL: https://gitlab-sjc.cisco.com/sydhtts/httsdashboard
+git clone https://gitlab-sjc.cisco.com/sydhtts/httsdashboard.git
+
+Generic BDB User for BDB API Call (from adam.cisco.com)
+================
+https://apps.na.collabserv.com/wikis/home?lang=en-us#!/wiki/Wae4ade24cd9d_45d9_941e_a7a44b66de07/page/BDB%20APIs%20v2
+syshtts.gen/@dm1nC1sc0
+
+CMGW Script - Send Event to HTTSDashBoard server RabbitMQ
+==================
+https://scripts.cisco.com/ui/edit/Casemon_APJC_HTTS_SYD_Case_Analytics?dev=true
+
+CMGW Label
+=================
+https://techzone.cisco.com/t5/BDB-App-Store-Scripts/CaseMon-Gateway-providing-solutions-and-targeted-content-based/ta-p/890502/load-autosave/true#form_1
+Casemon, Disgnostic Signature, Automation, CMGW_STATUS_CHANGED, CMGW_WORKGROUP_CHANGED, CMGW_CREATE, CMGW_NEW_NOTE, CMGW_CLOSED
+
+Config.ini
+================
+All configurations - user configparser to read it
+
+import configparser
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+Docker Compose
+================
+
+API Server - flask container
+=================
+Script to run container: flask-container.sh
+Persistent Volume: /home/sydhttsroot/HTTSDashboard/Apps
+
+Message Broker - RabbitMQ container
+=================
+Script to run container: ./container/RabbitMQ-cotainer.sh
+RabbitMQ-container.sh -- Start RabbitMQ container
+Management Portal: 10.67.82.105:15672 admin cisco!123
+Queue: CMGW_HTTS_Event -- receiving and consuming event from BDB script Casemon_APJC_HTTS_SYD_Case_Analytics
+ 
+Webex Notification - Redis container 
+=================
+Script to run container: ./container/Redis-container.sh
+Persistent Volume: /home/sydhttsroot/HTTSDashboard/RedisDB
+* Real-time function will be implmented with Redis
+* Accepted and InQueue event will send to Redis DB
+
+Case DB - Mongo container
+=================
+Script to run container: ./container/
+GUI mongo-express: http://10.67.82.105:8081/  admin cisco!123
+
+Case DB - PostgreSQL container -- deprecated
+=================
+Script to run container: ./container/Postgre-container.sh
+Persistent Volume: /home/sydhttsroot/HTTSDasboard/PostgreSQLDB/
+Init: run "python3 Postgres_init.py", only needed if database is deleted.
+
+Case DB Management Portal - pgadmin4 container -- deprecated
+================
+Script to run container: ./container/pgadmin4-container.sh
+Persistent Volume: /home/sydhttsroot/HTTSDasboard/pgadmin4/
+Management Portal: 10.67.82.105:8086 admin@htts.syd cisco!123
+
+App - App container
+================
+Script to run container: ./container/apps-container.sh
+* Persistent Volume: /home/sydhttsroot/HTTSDashboard/Apps
+
+Applications:
+===============
+* CommonLib.py -- common function
+-- isOnShift() #As described
+-- HTTSLogger() #Logging service
+-- read_customer_list_csv) #As described
+
+* RabbitMQ_HTTS_Event_Handler.py
+-- Receive Message from BORG CMGW 
+-- Put in CMGW_HTTS_Event queue
+-- realtime notification events - InQueue and Accepted event, send to Redis DB and hanlded by Redis_App_HTTS.py
+
+* Redis_App_HTTS.py
+-- Receive InQueue and Accepted event
+-- Logic to send to different WebexTeams groups.
+-- intergrate the CSOneAPI/v2 to get GCI

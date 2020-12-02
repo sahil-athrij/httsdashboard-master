@@ -1,0 +1,124 @@
+missing key word for the case taken
+---  1. key word  match 2. (need to code ) WG match, if 1 does not match, try to match 2
+
+1.
+==============
+empty lines between the webtool for readabiliity
+
+2.
+==============
+2020-08-03 Queue Volume <----- from Queue Case Volume
+
+3.
+==============
+Highlight the current Tech you pick up.
+
+==============
+Email for tech strip;:   check on the accruacy of the email.
+
+==============
+Analytics on the SV , including the cross-workgorup.
+
+
+HTTS Tracking Report
+==============
+sounds like ....
+
+Rolling out: ENT,Collab,HTTS,SP
+
+TODO: v.03
+Working: Cross-WORKGROUP 
+
+------ Milestone ------
+
+case taken after shift will also be put in the statemwent  .
+============
+1. arrving the queue -- 
+2. case taken --
+
+17:00 .
+============
+leave blank with a reason. --- some new to develop 
+--   unecptb, error , type error , 
+
+False positive
+=============
+BDB didint send the event
+Taken event didnt occur within your condition.
+
+SP HTTS - last tech strip
+
+
+Issue:
+689383163: 
+-- if FTS/UC engineer manually added himself in, it will be conunted as accept the FTS/UC in original SubTech
+
+Add indication of the last event from BORG to indicate possible down issue.
+Dispatched case showing in realtime
+
+TODO: v1.0
+EMEA-ACI: SR ownership stats by case number not by case taken by engineer.
+
+Tracker Radar plan:
+Source of the FTS (from SV)
+Change to JSON format for parsed files.
+
+Tracker Feature plan: 
+Security SSPT 
+-- BORG Keyword udpating
+-- App Add RabbitMQ_Sec_Event.log
+-- no optimization yet.
+Collab TAC
+-- no plan yet
+
+Analytics feature plan:
+
+Update log:
+2020-07-14 BORG: Adding SV FCoE keyword, App: Email adding message indicating BDB failure.
+2020-06-30 BORG: SV adding UCS-C High Density Storage Servers C3160/C3260
+2020-06-29 App: Decomission existing ACI to ACI_Legacy
+2020-06-28 App: Migrate Histrocial data to new engine
+2020-06-28 App: Cross-Skill Feature Test
+2020-06-26 App: add back the items Onshift/Other Engineer list in alphabet order for each tech_strip
+2020-06-24 App: Start List OnShift Engineer in GenerateCaseStatsDic
+2020-06-24 BORG: Add queue_name func as one of the ceteria to inject event to rabbitmq if tech based event is missing.
+2020-06-24 BORG: Add "UCS-C Authentication and Monitoring Issues" Keyword to SV
+2020-06-24 App: 689352699 - Bug fix, if a Case_Accepted by UC_Accepted, the Case_Accepted will disppear.
+2020-06-21 BORG: Trail adding Security Subtech
+2020-06-21 App:  Adding Total: Realtime events -- Total: 24
+2020-06-21 App:  Adding Queue in Realtime Event for Queue WW-SV,WW-STORAGE
+2020-06-21 App:  Modify the time displayed is AEST/AEDT(APJC) and IST(EMEA)
+2020-06-21 App:  Adding major feature: Possible Dispatched Case 
+2020-06-21 App:  Adding severity breakdown per workgroup: e.g. WW-DCRS Taken Case P1:2 P2:2 P3:2 P4:0
+2020-06-21 BORG: Fixing FTS/UC by the same func as InQueue -> 689331129 as Tetration not ACI
+2020-06-19 BORG: Logic update, Satatus_Changed Requeue->CE Pending as Case_Accepted event
+2020-06-17 BORG: Add Queue_Change from NULL as Case_InQueue due to 689306585 msising Case_InQueue
+2020-06-17 App bug fix:  Logic update: FTS and UC accepted case without FTS_InQueue or UC_InQueue will display in the taken cases
+2020-06-16 BORG: Module has FTS/UC issue that temporarily fixed by hard-coded.
+2020-06-16 3 questions from Rajiv EMEA-ACI
+2020-06-16 App: UpdateTime GMT is available on Tracker Report
+2020-06-15 App: 2 issues reported from EMEA-ACI merlot.
+-- One is as below 689282491,
+-- One is Merlot has on-call model across APJC and EMEA for one engineer, case taken are splited into APJC/EMEA report seperately for that engineer.
+2020-06-15 App: Tracker Report display WW-ACI-Solutions2 in Syd workgroup
+2020-06-15 Bug fix: 689282491 ACI case hits SV queue
+2020-06-14 Bug fix: 689283906 Accept event is missing
+
+container: python3.8-flask
+app: Apps/Flask_App_ACI.sh
+datasource: RabbitMQ_ACI_Event.log
+
+1. Realtime report is generated every minute during shift time under logs/ACI/report/ by docker exec  python3.8-flask python -u flask_aci/ACI_ParseRabbitMQ.py
+2. Copy the RabbitMQ_ACI_Event.log from overwatch to htts server every minute during shift time.
+3. Parsing RabbitMQ and generate events under logs/ACI/events by docker exec python3.8-flask python -u flask_aci/ParseRabbitMQ.py
+4. Execute Analytics based on logs/ACI/events under logs/ACI/analytics by docker exec python3.8-flask python -u flask_aci/ACI_Analytics_Automation.py
+5. Email is sent 15 minutes after shift
+
+cross-skill consideration:
+1.689282560 - SV owns a case, SV ping DCRS directly, DCRS add himself in a case without any Collab -- can not tell what is the scenario it is.
+
+open ceavats:
+BORG:
+* New Create case there is no ROUTING DESICISION event
+App:
+* Requeue is not part of the app function.

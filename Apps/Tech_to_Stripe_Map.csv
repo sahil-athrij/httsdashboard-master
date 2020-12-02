@@ -1,0 +1,79 @@
+Technology Id,Tech,Stripe
+0,Application Networking Services,ENT
+1,Application Networking Servicess,ENT
+10,Application-Oriented Networking,ENT
+11,ATM,ENT
+12,Broadband Aggregation and DSL,SP
+121,Broadband Cable,SP
+126,Cisco DNA - Software-Defined Access,ENT
+128,Cisco Video,ENT
+129,Cloud and Hybrid Products,Collab
+13,Cloud and System Management,SP
+130,CMCS-Compliance Management and Configuration Service-NCCM,RSS
+131,Collaboration and Conferencing,Collab
+134,Contact Center Software,Collab
+135,Data Analytics Software,RSS
+136,Data Center and Storage Networking,DC
+137,Data Center Computing - (UCS Blade and Rack Mount Server Systems),DC
+138,Data Center Management and Automation,DC
+139,Data Center Storage and Storage Area Networking (SAN),DC
+141,Dial-Access,ENT
+142,Hardware,SourcedSupport
+15,IBM Networking,DC
+16,Identity Services Engine (ISE) - 2.1 and Prior,Security
+17,Identity Services Engine (ISE) - 2.2,Security
+18,Identity Services Engine (ISE) - 2.3,Security
+103,Identity Services Engine (ISE) - 2.3 and Prior,Security
+19,Identity Services Engine (ISE) - 2.4,Security
+2,Identity Services Engine (ISE) - 2.6,Security
+20,Identity Services Engine (ISE) - 2.7,Security
+21,Identity Services Engine (ISE) - DO NOT USE,Security
+23,Internet of Things (IOT),ENT
+25,LAN Switching,ENT
+27,Mobile Wireless,SP
+28,Mobile Wireless (2G/3G/4G) and Wimax,SP
+3,Network Management CiscoWorks,SP
+30,NMS (Network Management Services),SP
+31,NMS (Network Management Services)- Service Provider,SP
+32,Optical Networking,SP
+35,Other,Other
+36,Physical Security and Building Systems,ENT
+39,Quality of Service (QoS) and Session Border Control (SBC),Collab
+4,Router and IOS Architecture,ENT
+40,Router and IOS-XE Architecture,ENT
+41,Routing Protocols (Includes NAT and HSRP),ENT
+44,Security - Access Control - AAA and Policy Management,Security
+45,Security - Email and Web,Security
+46,Security - Management,Security
+47,Security - Network Firewalls and Intrusion Prevention Systems,Security
+48,Security - VPN and Mobility,Security
+49,Service Control and APA,SP
+5,Service Provider - Video Delivery Systems,Collab
+51,Service Provider Access,SP
+54,Smart Services Capabilities,RSS
+58,Software Defined Wide Area Networking (SDWAN),ENT
+59,Solution Support (SSPT - contract required),Other
+60,StealthWatch,Security
+77,Telepresence,Collab
+80,"Virtualization Experience Infrastructure and Clients (VXI, VDI, VXC)",DC
+81,"Voice - Call Agents (Softswitch), SS7(ITP), BTS10200, PGW2200",SourcedSupport
+82,Voice - Communications Manager,Collab
+83,Voice - Communications Manager Additional Apps and Plugins,Collab
+84,Voice - Communications Manager Express (CME) and/or Unity Express (CUE),Collab
+85,Voice - Desktop Applications and Plug-Ins,Collab
+86,"Voice - Gateways, CUBE, CUSP",Collab
+87,"Voice - Phones, Fax, Modems",Collab
+88,Voice - Unity,Collab
+89,Voice (IP Telephony and Unified Messaging),Collab
+9,Voice (Pixstream),Collab
+90,"Voice (VoIP, VoFR, VoATM, FAX, SS7)",Collab
+91,WAN,SP
+94,Wireless,ENT
+95,XR-Routing-Platforms,SP
+100,Application Centric Infrastructure (ACI - SSPT Required),DC
+101,NULL,NULL
+102,SWL L2 Escalation - OP,Other
+103,Business Critical Services,Other
+104,CBW - Cisco Business Series Wireless Access Points,ENT
+105,CBS - Cisco Business Series Switches,Other
+106,CBR - Cisco Business Series Routers,ENT

@@ -1,0 +1,23 @@
+container: python3.8-flask
+app: Apps/Flask_App_ACI.sh
+datasource: RabbitMQ_ACI_Event.log
+
+1. Realtime report is generated every minute during shift time under logs/ACI/report/ by docker exec  python3.8-flask python -u flask_aci/ACI_ParseRabbitMQ.py
+2. Copy the RabbitMQ_ACI_Event.log from overwatch to htts server every minute during shift time.
+3. Parsing RabbitMQ and generate events under logs/ACI/events by docker exec python3.8-flask python -u flask_aci/ParseRabbitMQ.py
+4. Execute Analytics based on logs/ACI/events under logs/ACI/analytics by docker exec python3.8-flask python -u flask_aci/ACI_Analytics_Automation.py
+5. Email is sent 15 minutes after shift
+
+crontab 
+###### Generate Realtime report in /ACI/report based on RabbitMQ log #######
+*/1 0-6,23 * * * docker exec  python3.8-flask python -u flask_aci/ACI_ParseRabbitMQ.py
+3 7 * * * docker exec  python3.8-flask python -u flask_aci/ACI_ParseRabbitMQ.py
+###### ParseRabbitMQ and generate /ACI/events/InQueue,Accept,Dispatch include AEST/AEDT #####
+*/10 0-6,23 * * * docker exec python3.8-flask python -u flask_aci/ParseRabbitMQ.py
+5 7 * * * docker exec python3.8-flask python -u flask_aci/ParseRabbitMQ.py
+###### Analytics runs every 15 minutes during shift time include AEST/AEDT based on /ACI/events######
+*/15 0-6 * * * docker exec python3.8-flask python -u flask_aci/ACI_Analytics_Automation.py
+8 7 * * * docker exec python3.8-flask python -u flask_aci/ACI_Analytics_Automation.py
+###### Send email after shift hour ######
+15 6 * * * docker exec python3.8-flask python -u flask_aci/ACI_Email.py
+
