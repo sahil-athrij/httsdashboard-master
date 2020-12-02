@@ -42,6 +42,6 @@ if __name__ == '__main__':
     ## TODO. Remove "pip install pyOpenSSL" and use an actual cert.
     context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
     context.verify_mode = ssl.CERT_OPTIONAL
-    context.load_verify_locations('/app/ssl/Issuing_CA.cer')
-    context.load_cert_chain('/app/ssl/syd-htts-prd.cisco.com-63411.cer', '/app/ssl/PrivateKeyForFlask.key')
+    context.load_verify_locations('../ssl/Issuing_CA.cer')
+    context.load_cert_chain('../ssl/syd-htts-prd.cisco.com-63411.cer', '../ssl/PrivateKeyForFlask.key')
     app.run(host= '0.0.0.0', port=8443, ssl_context=context, debug=True)
