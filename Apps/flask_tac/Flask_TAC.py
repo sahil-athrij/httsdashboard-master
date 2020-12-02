@@ -576,6 +576,8 @@ if __name__ == '__main__':
     
     #Reading current config from file
     config = configparser.ConfigParser()
+    import os
+    print(os.getcwd())
     config.read('config.ini')
 
     ## TODO. Remove "pip install pyOpenSSL" and use an actual cert.
