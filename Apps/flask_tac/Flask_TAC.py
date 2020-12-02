@@ -578,8 +578,8 @@ if __name__ == '__main__':
     config = configparser.ConfigParser()
     import os
     print(os.getcwd())
-    config.read('config.ini')
-
+    config.read('Apps/flask_tac/config.ini')
+    print(config.__dict__)
     ## TODO. Remove "pip install pyOpenSSL" and use an actual cert.
     context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
     context.verify_mode = ssl.CERT_NONE
