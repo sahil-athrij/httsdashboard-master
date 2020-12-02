@@ -8,7 +8,7 @@ app = Flask(__name__)
 def BuildDailyReport(shift='apjc',tech_strip='aci',select_date='2020-06-28',AlarmString=''):
 
     ###### Configuration Initialization #######
-    config.read('./flask_tac/tacconfig.ini')
+    config.read('Apps/flask_tac/tacconfig.ini')
 
     general_frontend_html_dir = config[shift]['frontend_html']+'html/'
     general_commentfile = general_frontend_html_dir+'comment.txt'
@@ -577,9 +577,8 @@ if __name__ == '__main__':
     #Reading current config from file
     config = configparser.ConfigParser()
     import os
-    print(os.getcwd())
-    config.read('Apps/config.ini')
-    print(config.__dict__)
+
+
     ## TODO. Remove "pip install pyOpenSSL" and use an actual cert.
     context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
     context.verify_mode = ssl.CERT_NONE
