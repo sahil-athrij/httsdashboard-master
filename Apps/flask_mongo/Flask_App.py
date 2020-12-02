@@ -19,7 +19,7 @@ def response(caseList):
                 'result' : caseList
             }
         }
-    };
+    }
 
 @app.route("/")
 def index():
